@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="atuserviciobd"/>
+  <table-filter match-name="tiposervicio"/>
+  <table-filter match-name="rolpermiso"/>
+  <table-filter match-name="rol"/>
+  <table-filter match-name="tipo"/>
+  <table-filter match-name="historialservicio"/>
+  <table-filter match-name="subarea"/>
+  <table-filter match-name="notificaciones"/>
+  <table-filter match-name="area"/>
+  <table-filter match-name="supervisor"/>
+  <table-filter match-name="servicio"/>
+  <table-filter match-name="ubicacionservicio"/>
+  <table-filter match-name="supervisorservicio"/>
+  <table-filter match-name="barrio"/>
+  <table-filter match-name="empresa"/>
+  <table-filter match-name="permiso"/>
+  <table-filter match-name="serviciosolicitante"/>
+  <table-filter match-name="usuarioempresa"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="municipio"/>
+  <table-filter match-name="tipodetalle"/>
+  <table-filter match-name="servicioempresa"/>
+</hibernate-reverse-engineering>

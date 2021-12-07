@@ -1,0 +1,232 @@
+<style>
+    .form-group .help-block {
+        display: none;
+    }
+
+    .form-group.has-error .help-block {
+        display: block;
+    }
+    .angular-google-map-container { height: 400px; }    
+
+</style>
+
+<div class="col-md-12" ng-controller="ctrAltaServicio" onContextMenu="false" onkeydown="false">
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <center><h3>{{titulo}}</h3></center>
+        </div>
+        <div class="col-md-3">
+            <div style="padding: 5px;" id="msgPanel"></div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">  
+        <div class="col-md-12" id="altaServicio">
+            <form name="formServicio"  class="form-horizontal" novalidate>
+
+                <!--   <div id ="formServicio" class="form-group"> -->
+
+                <div class="row">
+                    <div class="col-md-5 form-group">
+                        <div  show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="itemSelect3" class="col-md-12 control-label">Tipo de servicio</label>
+                            <select class="form-control" id="itemSelect3" name="idCategoria" ng-model="nuevoServicio.idCategoria" required="">
+                                <option ng-repeat="categoria in categorias" value="{{categoria.clave}}">{{categoria.descripcion}}</option>                                                                
+                            </select>
+                            <p class="help-block" ng-if="formServicio.idCategoria.$error.required">Tipo de servicio requerida</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 form-group">
+                    </div>
+
+                    <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                        <label style="text-align: left;" for="txtDescripcion" class="col-sm-2 control-label">Descripción</label>
+                        <textarea  class="form-control" id="txtDescripcion" name="descripcion" ng-model="nuevoServicio.descripcion" ng-maxlength="256" placeholder="Descripción"> </textarea>
+                        <p class="help-block" ng-if="formServicio.descripcion.$error.maxlength">La descripcion no puede superar 256 caracteres </p>
+                        <br>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-5 form-group">
+
+                        <div show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="itemSelect4" class="col-md-12 control-label">Tipo de identidad</label>
+                            <select class="form-control" id="itemSelect3" name="tipoIdentidad" ng-model="nuevoServicio.tipoIdentidad" required="">
+                                <option ng-repeat="tipoIdentidad in tiposIdentidad" value="{{tipoIdentidad.clave}}">{{tipoIdentidad.descripcion}}</option>                                                                
+                            </select>
+                            <p class="help-block" ng-if="formServicio.tipoIdentidad.$error.required">Tipo de identidad requerida</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 form-group"></div>
+
+                    <div class="col-md-5 form-group">
+
+                        <div show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="txtIdentidad" class="col-md-12 control-label">Número de identidad:</label>
+                            <input type="text" class="form-control"  id="txtNroIdentidad" name="nroIdentidad" ng-maxlength="50" ng-model="nuevoServicio.nroIdentidad" placeholder="Número de Identidad" required/> 
+                            <p class="help-block" ng-if="formServicio.nroIdentidad.$error.maxlength">No puede superar los 50 caracteres </p>
+                            <p class="help-block" ng-if="formServicio.nroIdentidad.$error.required">Número de Identidad requerido</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                        <label style="text-align: left;" for="txtTelefono" class="col-md-12 control-label">Teléfono:</label>
+                        <input type="text" class="form-control"  id="txtTelefono" name="telefono" ng-maxlength="50" ng-model="nuevoServicio.telefono" placeholder="Teléfono"/> 
+                        <p class="help-block" ng-if="formServicio.telefono.$error.maxlength">No puede superar los 50 caracteres </p>
+                    </div>
+
+
+                    <div class="col-md-2 form-group">
+                    </div>
+
+
+                    <div class="col-md-5 form-group"  show-errors='{showSuccess: true}' >
+                        <label style="text-align: left;" for="txtCorreo" class="col-md-12 control-label">Correo electrónico</label>
+                        <input type="mail" class="form-control"  id="txtCorreo" name="correo" ng-maxlength="100" ng-model="nuevoServicio.correo" placeholder="Correo electrónico"/> 
+                        <p class="help-block" ng-if="formServicio.correo.$error.maxlength">No puede superar los 100 caracteres </p>
+                        <p class="help-block" ng-if="formServicio.correo.$error.email">Correo inválido</p>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                        <label style="text-align: left;" for="txtNombre" class="col-md-12 control-label">Nombre:</label>
+                        <input type="text" class="form-control"  id="txtNombre" name="nombre" ng-maxlength="100" ng-model="nuevoServicio.nombre" placeholder="Nombre"/> 
+                        <p class="help-block" ng-if="formServicio.nombre.$error.maxlength">No puede superar los 100 caracteres </p>
+                    </div>
+                </div>
+                <!--  </div> DIV DEL FORM -->
+
+                <div class="row">
+                    <div class="col-md-5 form-group">
+                        <label><input type="radio" name="env" ng-model="environment" value="1" ng-click="getVal()" />Seleccionar ubicación por mapa</label>
+                    </div>
+
+                    <div class="col-md-2 form-group"></div>
+
+                    <div class="col-md-5 form-group">
+                        <label><input type="radio" name="env" checked="checked" ng-model="environment" value="2" ng-click="getVal()"ng-click="getVal()"/>Escribir ubicación</label>
+                    </div>
+                </div>
+
+                <div class="ubicacionManual" ng-if="manual" >
+                    <div class="row">
+                        <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >               
+                            <label style="text-align: left;" for="selectedName" class="col-md-12 control-label">Municipio:</label>
+                            <select class="form-control" id="itemSelect" name="idMunicipio" ng-required="{{change == false}}" ng-model="nuevoServicio.idMunicipio" ng-change='getBarrios(nuevoServicio.idMunicipio)' required>
+                                <option  ng-repeat="municipio in municipios" value="{{municipio.clave}}">{{municipio.descripcion}}</option>                                                                
+                            </select>
+                            <p class="help-block" ng-if="formServicio.idMunicipio.$error.required">Municipio requerido</p>
+                        </div>
+
+                        <div class="col-md-2 form-group"></div>
+
+                        <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="itemSelect2" class="col-md-12 control-label">Barrio</label>
+                            <select class="form-control" id="itemSelect2" name="idBarrio" ng-required="{{change == false}}" ng-model="nuevoServicio.idBarrio" required>
+                                <option ng-repeat="barrio in barrios" value="{{barrio.clave}}">{{barrio.descripcion}}</option>
+                            </select>
+
+                            <p class="help-block" ng-if="formServicio.idBarrio.$error.required">Barrio requerido</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="txtCalle" class="col-md-12 control-label">Calle:</label>
+                            <input type="text" class="form-control"  id="txtCalle" name="calle" ng-required="{{change == false}}" ng-maxlength="256" ng-model="nuevoServicio.ubicacionservicio.calle" placeholder="Calle" required/> 
+                            <p class="help-block" ng-if="formServicio.calle.$error.maxlength">No puede superar los 256 caracteres </p>
+                            <p class="help-block" ng-if="formServicio.calle.$error.required" >Calle requerida</p>
+                        </div>
+
+                        <div class="col-md-2 form-group"></div>
+
+                        <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="txtEntreCalles" class="col-md-12 control-label">Entre calles:</label>
+                            <input type="text" class="form-control"  id="txtEntreCalles" ng-required="{{change == false}}" name="entreCalles" ng-maxlength="256" ng-model="nuevoServicio.ubicacionservicio.entreCalles" placeholder="Entre calles" required/> 
+                            <p class="help-block" ng-if="formServicio.entreCalles.$error.maxlength">No puede superar los 256 caracteres </p>
+                            <p class="help-block" ng-if="formServicio.entreCalles.$error.required" >Entre calles requeridas</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="txtManzana" class="col-md-12 control-label">Número de manzana:</label>
+                            <input type="text" class="form-control"  id="txtManzana" name="manzana" ng-maxlength="15" ng-model="nuevoServicio.ubicacionservicio.nroManzana" placeholder="Número de manzana"/> 
+                            <p class="help-block" ng-if="formServicio.txtManzana.$error.maxlength">No puede superar los 15 caracteres </p>                        
+                        </div>
+
+                        <div class="col-md-2 form-group"></div>
+
+                        <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="txtSolar" class="col-md-12 control-label">Número de solar:</label>
+                            <input type="text" class="form-control"  id="txtSolar" name="solar" ng-maxlength="15" ng-model="nuevoServicio.ubicacionservicio.nroSolar" placeholder="Número de solar"/> 
+                            <p class="help-block" ng-if="formServicio.txtSolar.$error.maxlength">No puede superar los 15 caracteres </p>                        
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="txtPadron" class="col-md-12 control-label">Número de padrón:</label>
+                            <input type="text" class="form-control"  id="txtPadron" name="padron" ng-maxlength="15" ng-model="nuevoServicio.ubicacionservicio.nroPadron" placeholder="Número de padrón"/>
+                            <p class="help-block" ng-if="formServicio.padron.$error.maxlength">No puede superar los 15 caracteres </p>                        
+                        </div>
+
+                        <div class="col-md-2 form-group"></div>
+
+                        <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="txtNroPuerta" class="col-md-12 control-label">Número de puerta:</label>
+                            <input type="text" class="form-control"  id="txtNroPuerta" name="nroPuerta" ng-maxlength="15" ng-model="nuevoServicio.ubicacionservicio.nroPuerta" placeholder="Número de puerta"/>
+                            <p class="help-block" ng-if="formServicio.nroPuerta.$error.maxlength">No puede superar los 15 caracteres </p>                        
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                            <label style="text-align: left;" for="txtApto" class="col-md-12 control-label">Número de apto:</label>
+                            <input type="text" class="form-control"  id="txtApto" name="apto" ng-maxlength="5" ng-model="nuevoServicio.ubicacionservicio.apto" placeholder="Número de apto"/> 
+                            <p class="help-block" ng-if="formServicio.apto.$error.maxlength">No puede superar los 5 caracteres </p>                        
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row" >
+                    <div ng-if="verMapa">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' events='map.events'>
+                            <ui-gmap-marker coords="pin.coords" idkey="1"></ui-gmap-marker>
+                            <ui-gmap-polygons
+                                models="polygons" dorebuildall="true" fill="'fill'"
+                                path="'path'" stroke="'stroke'" geodesic="'geodesic'"
+                                fit="false" editable="'editable'" draggable="'draggable'" clickable="'clickable'" >
+                            </ui-gmap-polygons>
+
+
+
+                        </ui-gmap-google-map>
+                        <br><br>
+                    </div>
+                </div>
+
+                <input type="button" id="btnConfirmar" class="btn btn-primary" ng-click="altaServicio()" value="Confirmar" /> 
+                <br><br>
+            </form>
+        </div>
+    </div>
+</div>

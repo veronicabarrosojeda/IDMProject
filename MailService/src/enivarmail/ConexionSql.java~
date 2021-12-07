@@ -1,0 +1,71 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package enivarmail;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Facundo
+ */
+public class ConexionSql {
+    public String db = "proyectoidm";
+    public String url = "jdbc:mysql://localhost:3306/"+db;
+    public String user = "root";
+    public String pass = "root";
+    
+    public ResultSet consultar(Connection conn,String sql) {
+        ResultSet resultado;
+        try {
+            
+            Statement sentencia = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            resultado = sentencia.executeQuery(sql);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }        
+        return resultado;
+    }
+    
+    public boolean ejecutar(Connection conn, String sql) {
+        try {
+
+            Statement sentencia = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            sentencia.executeUpdate(sql);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }        return true;
+    }
+    
+    public Connection Conectar(){
+
+       Connection link = null;
+
+       try{
+
+           Class.forName("org.gjt.mm.mysql.Driver");
+
+           link = DriverManager.getConnection(this.url, this.user, this.pass);
+
+       }catch(Exception ex){
+
+           JOptionPane.showMessageDialog(null, ex);
+
+       }
+
+
+       return link;
+
+   }
+}

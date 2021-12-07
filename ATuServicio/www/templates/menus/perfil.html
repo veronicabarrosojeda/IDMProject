@@ -1,0 +1,94 @@
+<ion-view view-title="Tu Perfil" name="perfil-view">
+    <ion-content class="padding masters" ng-controller="ctrUsuario">
+        <ion-grid>
+            <div class="row" style="margin-top: -15px;" >
+                <div class="container" style="width: 100%;">
+                    <div class="card cardM"  style="margin-top: -1px;">
+                        <div class="item item-text-wrap" style="text-align: center;">
+                            Mis datos
+                        </div>
+                    </div>
+                    <div class="list list-inset" style="margin-top: -10px;">
+                        <form name="userForm"  class="form-horizontal" novalidate>
+                            <div class="list">
+                                <label class="item item-input item-stacked-label">
+                                    <i class="icon ion-ios-person"></i><span class="input-label">Nombre *</span>
+                                    <input type="text" required ng-model="usuario.nombre">
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <i class="icon ion-ios-person"></i><span class="input-label">Apellido *</span>
+                                    <input type="text"  required ng-model="usuario.apellido">
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <i class="icon ion-ios-email"></i><span class="input-label">Email</span>
+                                    <input type="email"  ng-model="usuario.correo">
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <i class="icon ion-ios-email"></i><span class="input-label">Notificarme por correo</span>
+                                    <label class="toggle" style="float: right; margin-right: 2%;">
+                                            <input type="checkbox"  ng-model="usuario.notificar">
+                                            <div class="track">
+                                                <div class="handle">
+                                                </div>
+                                            </div>
+                                        </label>
+
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <i class="icon ion-ios-telephone"></i><span class="input-label" icon-on="ion-ios-clock">Telefono</span>
+                                    <input type="number" ng-model="usuario.telefono">
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <i class="icon ion-card"></i><span class="input-label" icon-on="ion-ios-clock">Identidad</span>
+                                    <input type="number"  ng-model="usuario.nroIdentidad">
+                                </label>
+
+                                <div class="item">
+                                    <label class="item-stacked-label">
+                                        <i class="icon ion-card"></i><span class="input-label" icon-on="ion-ios-clock">Tipo de Identidad</span>
+                                    </label>
+
+                                    <label class=" item-input item-stacked-label">
+                                        <select class="select" ng-model="usuario.tipoIdentidad" >                                    
+                                            <option ng-repeat="option in tiposIdentidad" value="{{option.clave}}">{{option.descripcion}}</option>
+                                        </select>
+                                    </label>
+                                </div> 
+
+                                <label class="item item-input item-stacked-label">
+                                    <span class="input-label">Usuario *</span>
+                                    <input type="text" required ng-model="usuario.nickname">
+                                </label>
+                                <hr>
+                                <label class="item item-input item-stacked-label">
+                                    <span class="input-label">Clave atual *</span>
+                                    <input type="password" placeholder="******" required ng-model="usuarioClave.passwordActual">
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <span class="input-label">Clave nueva *</span>
+                                    <input type="password" placeholder="******" required ng-model="usuarioClave.passwordNueva">
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <span class="input-label">Repetir clave *</span>
+                                    <input type="password" placeholder="******" required ng-model="usuarioClave.passwordNuevaReiterada">
+                                </label>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button class="button icon-right ion-chevron-right button-balanced button-block center" ng-click="ModificarPerfil()" >
+                    Modificar Datos
+                </button>
+            </div>
+            <div class="row btnUltimo">
+                <button class="button icon-right ion-chevron-right button-calm button-block center" ng-click="ModificarClave()">
+                    Modificar Clave
+                </button>
+            </div>
+        </ion-grid>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,32 @@
+<div ng-controller="ctrListarArea">
+    <br><br>
+
+    <a ng-controller="ctrMenu"  href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-click="Go('/altaArea')"><i class=""></i>Area</a>                            
+
+    <div>
+        <table class="" style="width: 100%">
+            <tr>
+                <td style="width: 50%"><h4>Areas creadas</h4></td>
+                <td style="width: 10%;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></td>
+                <td style="width: 40%;"><input type="search" class="form-control" ng-keypress="listarAreaFiltro()" ng-model="filtro" placeholder="Escriba para buscar..."></td>
+            </tr>
+        </table>
+    </div>
+    <br><br>
+    <div class="table-responsive">
+        <table class="table" style="width: 100%">
+            <tr>
+                <td><strong>Nombre</strong></td>
+                <td><strong>Descripcion</strong></td>
+
+            </tr>
+            <tr ng-repeat="area in colAreas" ng-controller="ctrMenu">      
+                <td>{{area.nombre}}</td>
+                <td>{{area.descripcion}}</td>
+                <td><a class="btn btn-default" ng-click="cargarId(area.idArea);Go('/modificarArea')" role="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>

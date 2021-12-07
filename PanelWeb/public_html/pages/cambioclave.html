@@ -1,0 +1,93 @@
+<style>
+    .form-group .help-block {
+        display: none;
+    }
+
+    .form-group.has-error .help-block {
+        display: block;
+    }
+
+</style>
+<div class="col-md-12" ng-controller="ctrClave" >       
+    <div class="row" style="height: 80px;">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <center><h3>{{titulo}}</h3></center>
+            <hr/>
+        </div>
+        <div class="col-md-3">
+            <div style="padding: 5px;" id="msgPanel"></div>
+        </div>            
+    </div>
+    <div class="row">     
+        <div style="margin-left: 20%" class="col-md-12" id="cambioDatos">      
+            <form name="userForm"  class="form-horizontal" novalidate>
+                <div id ="userform" class="form-group">
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="inputNombre" class="col-md-2 control-label">Nombre</label>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="text" class="form-control"  id="txtNombre" name="nombre" ng-maxlength="25" placeholder="Nombre" ng-model="formUser.nombre"  required/> 
+                            <p class="help-block" ng-if="userForm.nombre.$error.required">Nombre requerido</p>
+                            <p class="help-block" ng-if="userForm.nombre.$error.maxlength">El nombre no puede superar 25 caracteres </p>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="inputApellido" class="col-md-2 control-label">Apellido</label>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="text" class="form-control"  id="txtApellido" name="apellido" placeholder="Apellido" ng-maxlength="25" ng-model="formUser.apellido" required=""/>
+                            <p class="help-block" ng-if="userForm.apellido.$error.required">Apellido requerido</p>
+                            <p class="help-block" ng-if="userForm.apellido.$error.maxlength">El apellido no puede superar 25 caracteres </p>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="inputNombre" class="col-md-2 control-label">Nombre de Usuario</label>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="text" class="form-control"  id="txtLoginName" name="LoginName" ng-maxlength="15" placeholder="Usuario" ng-model="formUser.nickname" required=""/>                                    
+                            <p class="help-block" ng-if="userForm.LoginName.$error.required">Nombre de usuario requerido</p>
+                            <p class="help-block" ng-if="userForm.LoginName.$error.maxlength">El LoginName no puede superar 15 caracteres </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="inputEmail" class="col-md-2 control-label">Correo</label>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="email" class="form-control"  id="txtCorreo" name="email" ng-maxlength="100" placeholder="Correo" ng-model="formUser.correo"/>
+                            <p class="help-block" ng-if="userForm.email.$error.email">Correo inválido</p>
+                            <p class="help-block" ng-if="userForm.email.$error.maxlength">Correo no puede superar 100 caracteres </p>
+
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="txtPassword" class="col-md-2 control-label">Nueva clave</label>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="password" class="form-control"  id="passwordNueva" name="passwordNueva" equal="repassword" placeholder="Nueva Clave" ng-model="formPass.passwordNueva" required=""/>                                    
+                            <p class="help-block" ng-if="userForm.passwordNueva.$error.required">Campo requerido</p>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="txtPassword" class="col-md-2 control-label">Repetir nueva clave</label>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="password" class="form-control"  id="passwordNuevaReiterada" name="passwordNuevaReiterada" equal="repassword" placeholder="Reiteración de Clave" ng-model="formPass.passwordNuevaReiterada" required="" pw-check='passwordNueva'/>                                    
+                            <p class="help-block" ng-if="userForm.passwordNuevaReiterada.$error.required">Campo requerido</p>
+                            <p class="help-block" ng-if="userForm.passwordNuevaReiterada.$error.pwmatch">La clave no conicide</p>
+                        </div>  
+                    </div>
+                    <br/>
+                </div>
+                <div id="cambiarClave">
+                    <input type="submit" id="btnConfirmar" class="btn btn-primary" ng-click="confirmarCambio()" value="Confirmar" /> 
+                    <button class="btn btn-link" ng-click="reset()">Limpiar</button>
+                </div>     
+                <br/>
+            </form>            
+        </div>
+
+    </div>   
+</div>

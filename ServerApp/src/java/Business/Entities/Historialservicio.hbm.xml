@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/04/2017 09:37:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Business.Entities.Historialservicio" table="historialservicio" catalog="atuserviciobd" optimistic-lock="version">
+        <id name="idHistorialServicio" type="java.lang.Long">
+            <column name="idHistorialServicio" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="servicio" class="Business.Entities.Servicio" fetch="select">
+            <column name="idServicio" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" />
+        </property>
+        <property name="estado" type="java.lang.Short">
+            <column name="estado" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fechaModificacion" length="10" />
+        </property>
+        <property name="idTipoServicio" type="java.lang.Integer">
+            <column name="idTipoServicio" />
+        </property>
+        <property name="fechaIngreso" type="date">
+            <column name="fechaIngreso" length="10" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="512" />
+        </property>
+    </class>
+</hibernate-mapping>

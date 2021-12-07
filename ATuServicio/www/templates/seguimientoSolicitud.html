@@ -1,0 +1,75 @@
+<ion-view view-title="Seguimiento de Solicitud" name="login-view">
+    <ion-content class="padding masters" ng-controller="ctrSeguimiento">
+
+        <!-- FORMULARIO BUSQUEDA -->
+        <div  ng-if="verForm">
+            <div class="item item-text-wrap" style="text-align: center;">
+                <p>
+                    Al ingresar una solicitud de servicio se le proporciona un número el cual le permite comprobar el estado en el que se encuentra la misma.</p>
+                <br><p>
+                    Ingrese a continuación el número asociado a su solicitud.
+                </p>
+            </div>
+
+            <div class="list list-inset container">
+                <div class="item">
+                    <div class="list">
+                        <label class="item item-input item-stacked-label">
+                            <i class="icon ion-ios-list-outline"></i><span class="input-label">Numero de Solicitud *</span>
+                            <input type="number" placeholder="Número proporcionado" ng-model="solicitud.nroSolicitud">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button class="button button-block button-calm" ng-click="buscar()">Buscar <i class="icon ion-ios-search-strong"></i></button>
+        </div>
+
+        <!-- LISTADO DE DATOS SOLICITUD -->
+        <div class="row" style="margin-top: -8%;" ng-if="verDatos" >
+            <div class="list list-inset container formDatos">
+                <div class="list">
+                    <label class="item tituloFormDatos">
+                        Datos de la Solicitud
+                    </label>
+                    <!--<img ng-src = "{{historySolicitud.rutaImagen}}">-->
+                    <img ng-src="{{historySolicitud.rutaImagen}}" class="imgSolicitud">
+
+                    <label class="item item-input ">
+                        <i class="icon ion-ios-information"></i><span class="input-label"> Número:</span>
+                        <p class="lblDato">       {{historySolicitud.idServicio}}</p>
+                    </label>
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label">Motivo: </span>
+                    </label>
+                    <label class="item"><p class="lblDato">{{historySolicitud.descripcionServicio}}</p></label>
+
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label">Servicio solicitado:</span>
+                    </label>
+                    <label class="item"><p class="lblDato">{{historySolicitud.nombreTipoServicio}}</p></label>
+
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label" icon-on="ion-ios-clock">Area asignada:</span>
+                    </label>
+                    <label class="item"><p class="lblDato">{{historySolicitud.nombreArea}}</p></label>
+
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label" icon-on="ion-ios-clock">Fecha de ingreso:</span>
+                    </label>
+                    <label class="item"><p class="lblDato">{{historySolicitud.fechaIngreso}}</p></label>
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label" icon-on="ion-ios-clock"> Estado:</span>
+                        <p class="lblDato">{{historySolicitud.nombre}}</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="verDatos">
+            <div class="button-bar">
+                <a class="button button-calm button-block center" ng-click="volverForm()">
+                    <i class="icon ion-ios-undo"></i> Volver a Buscar
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

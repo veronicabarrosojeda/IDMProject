@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/04/2017 09:37:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Business.Entities.Servicio" table="servicio" catalog="atuserviciobd" optimistic-lock="version">
+        <id name="idServicio" type="java.lang.Long">
+            <column name="idServicio" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tiposervicio" class="Business.Entities.Tiposervicio" fetch="select">
+            <column name="idTipoServicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ubicacionservicio" class="Business.Entities.Ubicacionservicio" fetch="select">
+            <column name="idUbicacionServicio" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" />
+        </property>
+        <property name="rutaImagen" type="string">
+            <column name="rutaImagen" length="200" />
+        </property>
+        <property name="estado" type="short">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="fechaIngreso" type="date">
+            <column name="fechaIngreso" length="10" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="fechaModificacion" length="10" not-null="true" />
+        </property>
+        <property name="idUsuarioFuncionario" type="java.lang.Integer">
+            <column name="idUsuarioFuncionario" />
+        </property>
+        <property name="tipoOrigen" type="java.lang.Integer">
+            <column name="tipoOrigen" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="512" />
+        </property>
+        <set name="historialservicios" table="historialservicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idServicio" />
+            </key>
+            <one-to-many class="Business.Entities.Historialservicio" />
+        </set>
+        <set name="supervisors" table="supervisorservicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idServicio" not-null="true" />
+            </key>
+            <many-to-many entity-name="Business.Entities.Supervisor">
+                <column name="idSupervisor" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="serviciosolicitantes" table="serviciosolicitante" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idServicio" not-null="true" />
+            </key>
+            <one-to-many class="Business.Entities.Serviciosolicitante" />
+        </set>
+        <set name="empresas" table="servicioempresa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idServicio" not-null="true" />
+            </key>
+            <many-to-many entity-name="Business.Entities.Empresa">
+                <column name="idEmpresa" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,243 @@
+<ion-view view-title="Ingresar Solicitud" name="altaSolicitud-view">
+    <ion-content ng-controller="ctrAltaSolicitud" class="masters">
+        <ion-grid>
+            <div class="row" style="margin-top: -15px;">
+                <div class="card cardM" style="width: 100%">
+                    <div class="item" style="text-align: center;">
+                        {{cardText}}
+                        <div class="" id="selectorUbicacion" ng-if="!selectUbicacion">
+                            <hr>
+                            <div>
+                                <div class="list col tipoMap">
+                                    <div class="item range range-positive" style="background-color: transparent;">
+                                        <i class="icon ion-map"></i>
+                                        <input type="range" name="volume" min="0" max="1" ng-model="inputSelector" ng-change="selectorUbicacion()">
+                                        <i class="icon ion-ios-list-outline"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="row" id="mapa" ng-if="!ocultarMapa">
+
+                <ui-gmap-google-map center='map.center' zoom='map.zoom' events='map.events'>
+                    <ui-gmap-circle center="map.circle.center"
+                                    radius="map.circle.radius"
+                                    fill="map.circle.fill"
+                                    stroke="map.circle.stroke"
+                                    clickable="map.circle.clickable"
+                                    draggable="map.circle.draggable"
+                                    visible="map.circle.visible">
+                    </ui-gmap-circle>
+                    <ui-gmap-marker coords="pin.coords" idkey="1"></ui-gmap-marker>
+                    <ui-gmap-marker  ng-repeat="sol in colSolicitudes track by sol.id" coords="sol.coords" idkey="sol.id" options="sol.options" >
+
+                        <ui-gmap-window show="map.window.show" coords="map.window.model" options="map.window.options" closeClick="map.window.closeClick()">
+                            <div style="color: black; width: 200px; height: 100%;">
+                                <center>
+                                    <b>Nro. Servicio: </b>{{sol.id}}<br/>
+                                    <b>Tipo: </b>{{sol.nombreTipoServicio}}<br/>
+                                    <b>Detalle: </b>{{sol.descripcionServicio}}<br/>
+
+                                    <div class="button-bar">
+                                        <a class="button button-small button-positive button-block center" ng-click="$parent.unirseReclamo({{sol.id}})">
+                                            Unirme a la solicitud
+                                        </a>
+                                    </div>
+                                </center>
+                            </div>
+                        </ui-gmap-window>
+
+                    </ui-gmap-marker>
+                    <ui-gmap-polygons
+                        models="polygons" dorebuildall="true" fill="'fill'"
+                        path="'path'" stroke="'stroke'" geodesic="'geodesic'"
+                        fit="false" editable="'editable'" draggable="'draggable'" clickable="'clickable'" >
+                    </ui-gmap-polygons>
+
+                </ui-gmap-google-map>
+
+            </div>
+
+            <div class="row" id="ubicacionManual" ng-if="ubicacionManual">
+                <!-- UBUCACION MANUAL -->
+                <!-- UBUCACION MANUAL -->
+                <div class="list list-inset container" style="width: 100%; margin-top: -10px;">
+
+                    <div class="item">
+                        <label class="item-input item-stacked-label">
+                            <i class="icon ion-map"></i><span class="input-label">Seleccione Municipio:</span>
+
+                        </label>
+                        <label class="item-input item-stacked-label">
+
+                            <select id="itemSelect" class="select" name="idMunicipio" ng-required="{{change == false}}" ng-model="nuevoServicio.idMunicipio" ng-change='getBarrios(nuevoServicio.idMunicipio)' required>
+                                <option  ng-repeat="municipio in municipios" value="{{municipio.clave}}">{{municipio.descripcion}}</option>                                                                
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="item">
+                        <label class="item-input item-stacked-label">
+                            <i class="icon ion-map"></i><span class="input-label">Seleccione Barrio</span>
+                        </label>
+
+                        <label class="item-input item-stacked-label">
+                            <select class="form-control" style="width: 95%;" id="itemSelect2" name="idBarrio" ng-required="{{change == false}}" ng-model="nuevoServicio.idBarrio" required>
+                                <option ng-repeat="barrio in barrios" value="{{barrio.clave}}">{{barrio.descripcion}}</option>
+                            </select>
+                        </label>
+
+                    </div>
+                    <!--
+                    <div  show-errors='{showSuccess: true}' >
+                        <label style="text-align: left;" for="txtCalle" class=" control-label">Calle:</label>
+                        <input type="text" class="form-control"  id="txtCalle" name="calle" ng-required="{{change == false}}" ng-maxlength="50" ng-model="nuevoServicio.ubicacionservicio.calle" required/> 
+                        <p class="help-block" ng-if="formServicio.calle.$error.maxlength">No puede superar los 50 caracteres </p>
+                        <p class="help-block" ng-if="formServicio.calle.$error.required" >Calle requerida</p>
+                    </div>
+                    -->
+
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-location"></i><span class="input-label">Calle</span>
+                        <input type="text" placeholder="Calle principal" required ng-model="nuevoServicio.ubicacionservicio.calle">
+
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-location"></i><span class="input-label">Entre calles</span>
+                        <input type="text" placeholder="Calles adyacentes" class="form-control"  id="txtEntreCalles" ng-required="{{change == false}}" name="entreCalles" ng-maxlength="150" ng-model="nuevoServicio.ubicacionservicio.entreCalles" required/>
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-location"></i><span class="input-label">Manzana</span>
+                        <input type="number" placeholder="Número de manzana" class="form-control"  id="txtManzana" name="manzana" ng-maxlength="15" ng-model="nuevoServicio.ubicacionservicio.nroManzana" /> 
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-location"></i><span class="input-label">Solar</span>
+                        <input type="number" placeholder="Número de solar" class="form-control"  id="txtSolar" name="solar" ng-maxlength="15" ng-model="nuevoServicio.ubicacionservicio.nroSolar" /> 
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-location"></i><span class="input-label">Padron</span>
+                        <input type="number" placeholder="Número de padron" class="form-control"  id="txtPadron" name="padron" ng-maxlength="15" ng-model="nuevoServicio.ubicacionservicio.nroPadron" />
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-location"></i><span class="input-label">Nro de Puerta</span>
+                        <input type="text" placeholder="Número de puerta" class="form-control"  id="txtNroPuerta" name="nroPuerta" ng-maxlength="15" ng-model="nuevoServicio.ubicacionservicio.nroPuerta" />
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-location"></i><span class="input-label">Nro de Apto</span>
+                        <input type="text" placeholder="Número de puerta" class="form-control"  id="txtApto" name="apto" ng-maxlength="5" ng-model="nuevoServicio.ubicacionservicio.apto" /> 
+                    </label>
+
+                    <!-- UBUCACION MANUAL -->
+                    <!-- UBUCACION MANUAL -->
+
+                </div>
+
+            </div>
+
+
+            <div class="row" id="form" ng-if="!ocultarForm">
+                <div class="list list-inset container" style="width: 100%; margin-top: -10px;">
+                    <form name="userForm"  class="form-group" novalidate>
+
+                        <!-- INGRESAR IMAGEN TODO-GALERIA -->
+                        <center>
+                            <br>
+                            <div class="col-md-12 form-group">
+                                <div  show-errors='{showSuccess: true}' >
+                                    <button style="background-color: #dddddd;" class = "button icon-left ion-android-camera" ng-click = "tomarFotoEdit()">Tomar Foto</button>
+                                    <button style="background-color: #dddddd;" class = "button icon-left ion-android-folder" ng-click = "obtenerFoto(0)">Abrir Galeria</button>
+                                    <img style="display:none;width:50%;height:10%; background-size: cover;" id="smallImage" src="" />
+                                </div>
+                            </div>
+                        </center>
+                        <br>
+                        <!-- FIN INGRESAR IMAGEN TODO-GALERIA -->
+                        <div class="item">
+                            <label class="item-input item-stacked-label">
+                                <span class="input-label">Seleccione la categoría</span>
+
+                            </label>
+                            <label class="item-input item-stacked-label">
+
+                                <select class="form-control select"  id="itemSelect3" name="idCategoria" ng-model="nuevoServicio.idCategoria" required="">
+                                    <option ng-repeat="categoria in categorias" value="{{categoria.clave}}">{{categoria.descripcion}}</option>                                                                
+                                </select>
+                            </label>
+                        </div>
+
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Descripción</span>
+                            <textarea  class="form-control" style="width: 100%; height: 60px;" id="txtDescripcion" name="descripcion" ng-model="nuevoServicio.descripcion" ng-maxlength="256" placeholder="Ingrese una descripción para su solicitud"> </textarea>
+
+                        </label>
+
+                        <!-- Datos de Solicitante -->
+                        <center><h4>Datos personales</h4></center>
+
+
+                        <div class="item">
+                            <label class="item-input item-stacked-label">
+                                <span class="input-label">Selecciona tipo de identidad</span>
+
+                            </label>
+                            <label class="item-input item-stacked-label">
+                                <select class="form-control select"  id="itemSelect3" name="tipoIdentidad" ng-model="nuevoServicio.tipoIdentidad" required="">
+                                    <option ng-repeat="tipoIdentidad in tiposIdentidad" value="{{tipoIdentidad.clave}}">{{tipoIdentidad.descripcion}}</option>                                                                
+                                </select>
+                            </label>
+                        </div>
+
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Número de Identidad</span>
+                            <input type="text" class="form-control" placeholder="Ejemplo: 43506806"  id="txtNroIdentidad" name="nroIdentidad" ng-maxlength="50" ng-model="nuevoServicio.nroIdentidad" required/> 
+                        </label>
+
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Teléfono</span>
+                            <input type="number" placeholder="099777888" class="form-control"  id="txtTelefono" name="telefono" ng-maxlength="50" ng-model="nuevoServicio.telefono" required/> 
+
+                        </label>
+
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Email</span>
+                            <input type="email" class="form-control" placeholder="ejemplo@correo.com"  id="txtCorreo" name="correo" ng-maxlength="50" ng-model="nuevoServicio.correo" required> 
+                        </label>
+
+                    </form>
+                </div>
+            </div>
+
+
+
+            <div class="row" ng-if="!BotonSiguiente">
+                <button class="button icon-right ion-chevron-right button-balanced button-block center" ng-click="showForm()" style="float: left;">
+                    {{botonText}}
+                </button>
+            </div>
+
+            <div class="row" ng-if="BotonConfirmar">
+                <button class="button icon-right ion-chevron-right button-balanced button-block center" ng-click="altaServicio()" style="float: left">
+                    Ingresar solicitud de servicio
+                </button>
+            </div>
+
+            <div class="row btnUltimo" ng-if="ocultarBotonAtras">
+                <button class="button icon-left ion-chevron-left button-calm button-block center" ng-click="hideForm()">
+                    Regresar
+                </button>
+            </div>
+
+        </ion-grid>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/04/2017 09:37:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Business.Entities.Serviciosolicitante" table="serviciosolicitante" catalog="atuserviciobd" optimistic-lock="version">
+        <id name="idServicioSolicitante" type="java.lang.Long">
+            <column name="idServicioSolicitante" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="servicio" class="Business.Entities.Servicio" fetch="select">
+            <column name="idServicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="Business.Entities.Usuario" fetch="select">
+            <column name="idUsuario" />
+        </many-to-one>
+        <property name="nroIdentidad" type="string">
+            <column name="nroIdentidad" length="30" />
+        </property>
+        <property name="tipoIdentidad" type="java.lang.Integer">
+            <column name="tipoIdentidad" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="20" />
+        </property>
+        <property name="nombreSolicitante" type="string">
+            <column name="nombreSolicitante" length="100" />
+        </property>
+        <property name="correoSolicitante" type="string">
+            <column name="correoSolicitante" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

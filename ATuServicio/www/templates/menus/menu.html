@@ -1,0 +1,15 @@
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+    <!-- Dashboard Tab -->
+    <ion-tab title="Solicitud" icon-off="ion-ios-paper-outline" icon-on="ion-ios-paper" href="#/menu/solicitud">
+        <ion-nav-view name="menu-solicitud"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Mis Solicitudes" icon-off="ion-ios-folder-outline" icon-on="ion-ios-folder" href="#/menu/misSolicitudes">
+        <ion-nav-view name="menu-misSolicitudes"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Perfil" icon-off="ion-ios-person-outline" icon-on="ion-person" href="#/menu/perfil">
+        <ion-nav-view name="menu-perfil"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="LogOut" icon-off="ion-log-out" icon-on="ion-log-out" ng-click="logOut()">
+    </ion-tab>
+</ion-tabs>

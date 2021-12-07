@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/04/2017 09:37:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Business.Entities.Subarea" table="subarea" catalog="atuserviciobd" optimistic-lock="version">
+        <composite-id name="id" class="Business.Entities.SubareaId">
+            <key-property name="idSubArea" type="int">
+                <column name="idSubArea" />
+            </key-property>
+            <key-property name="idArea" type="int">
+                <column name="idArea" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="area" class="Business.Entities.Area" update="false" insert="false" fetch="select">
+            <column name="idArea" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="25" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" />
+        </property>
+        <property name="estado" type="boolean">
+            <column name="estado" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

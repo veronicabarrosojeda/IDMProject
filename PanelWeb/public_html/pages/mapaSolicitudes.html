@@ -1,0 +1,101 @@
+
+<style>
+    .angular-google-map-container { height: 400px; }    
+</style>
+
+<div class="col-md-12 panel panel-default" ng-controller="ctrMapaSolicitudes">       
+    <div class="row" style="height: 80px;">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+            <center><h3>{{titulo}}</h3></center>
+        </div>
+        <div class="col-md-4">
+            <div style="padding: 5px;" id="msgPanel"></div>
+        </div>            
+    </div>
+    <div class="row form-group">
+        
+        <div class="col-sm-2">
+            <b style="margin-left: 20px; font-size: 15px;" >Empresas</b>
+        </div>
+        <div class="col-sm-3">
+            <div style="margin-left: 10px;" ng-click="actualizarMapa()" ng-dropdown-multiselect="" options="colEmpresasItems" selected-model="tipoEmpresasSelect"  extra-settings="settings"></div>
+        </div>
+        <div class="col-sm-3">
+            <b style="margin-left: 20px; font-size: 15px;" >Tipo de Servicio</b>
+        </div>
+        <div class="col-sm-2">
+            <div style="margin-left: 10px;" ng-click="actualizarMapa()" ng-dropdown-multiselect="" options="tipoServicio" selected-model="tipoServicioSelect" extra-settings="settings" ></div>
+        </div>
+    </div>
+     <div class="row form-group">        
+        <div class="col-sm-2">
+            <b style="margin-left: 20px; font-size: 15px;" >Cant. Sol.</b>
+        </div>
+        <div class="col-sm-3">
+            <input type="number" class="form-control" ng-change="actualizarMapa()" ng-model="qtSolicitantes"/>
+        </div>
+         <div class="col-sm-3">
+            <b style="margin-left: 20px; font-size: 15px;" >Días Pendiente</b>
+        </div>
+        <div class="col-sm-2">
+            <input type="number" class="form-control" ng-change="actualizarMapa()" ng-model="diasPendiente" />
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="col-sm-2">
+            <b style="margin-left: 20px; font-size: 15px;" >Desde</b>
+        </div>
+        <div class="col-md-3" >             
+            <p class="input-group">
+                 <input type="text" class="form-control" ng-change="actualizarMapa()" uib-datepicker-popup ng-model="dtDesde" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>           
+        </div>
+         <div class="col-sm-3">
+            <b style="margin-left: 20px; font-size: 15px;" >Hasta</b>
+        </div>
+          <div class="col-md-3" >  
+            <p class="input-group">
+                <input type="text" class="form-control" ng-change="actualizarMapa()" uib-datepicker-popup ng-model="dtHasta" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+           
+        </div>
+    </div>
+    <br/>
+    <div class="form-group" id="filtros">
+        <div class="checkbox" >
+            <label ng-repeat="chk in estados" style="margin-left: 20px">                                  
+                <input type="checkbox" id="{{chk.clave}}" ng-click="actualizarMapa()" ng-checked="setCheckBox(this)"> <b style="font-size: 15px;">{{chk.descripcion}}</b><img width="20" height="20" src="{{getRutaImagenByClave(chk.clave)}}" alt=""/>
+            </label>
+        </div>
+    </div>
+    <div class="row">        
+        <div class="col-md-12" id="mapaReclamos" >
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true">                
+                <ui-gmap-marker  ng-repeat="sol in colSolicitudes track by sol.id" coords="sol.coords" idkey="sol.id" options="sol.options" >
+
+                    <ui-gmap-window show="map.window.show" coords="map.window.model" options="map.window.options" closeClick="map.window.closeClick()">
+                        <div style="color: black">
+                            <b>Nro. Servicio: </b><a ng-click="$parent.verServicio($parent.sol.id)">{{sol.id}}</a><br/>
+                            <b>Tipo: </b>{{sol.nombreTipoServicio}}<br/>
+                            <b>Cant. Solicitantes: </b>{{sol.qtSolicitantes}}<br/>
+                            <b>Ingreso: </b>{{sol.fechaIngreso}}<br/>
+                            <b>Area IDM </b>{{sol.nombreArea}}<br/>
+                            <b>Dias Pendiente </b>{{sol.DiasIngreso}}<br/>
+                        </div>
+                    </ui-gmap-window>
+
+                </ui-gmap-marker>
+
+            </ui-gmap-google-map>
+        </div>
+    </div>
+</div>

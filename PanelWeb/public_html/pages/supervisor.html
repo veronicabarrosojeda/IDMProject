@@ -1,0 +1,68 @@
+<style>
+    .form-group .help-block {
+        display: none;
+    }
+
+    .form-group.has-error .help-block {
+        display: block;
+    }
+
+</style>
+<div class="col-md-12" ng-controller="ctrSupervisor" ng-init="listarSupervisores()">       
+    <div class="row" >
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <center><h3>{{titulo}}</h3></center>
+        </div>
+        <div class="col-md-3">
+            <div style="padding: 5px;" id="msgPanel"></div>
+        </div>            
+    </div>
+    <div class="row">   
+        <hr/>
+        
+        <div class="col-md-12" id="altaSupervisor">      
+            <form name="supForm"  class="form-horizontal" novalidate>
+                <div id ="supform" class="form-group">
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="inputNombre" class="col-md-2 control-label">Nombre</label>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="text" class="form-control"  id="txtNombre" name="nombre" ng-maxlength="25" placeholder="Nombre" ng-model="formSupervisor.nombre" required/> 
+                            <p class="help-block" ng-if="supForm.nombre.$error.required">Nombre requerido</p>
+                            <p class="help-block" ng-if="supForm.nombre.$error.maxlength">El nombre no puede superar 25 caracteres </p>
+                        </div>  
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="text" class="form-control"  id="txtApellido" name="apellido" placeholder="Apellido" ng-maxlength="25" ng-model="formSupervisor.apellido" required=""/>
+                            <p class="help-block" ng-if="supForm.apellido.$error.required">Apellido requerido</p>
+                            <p class="help-block" ng-if="supForm.apellido.$error.maxlength">El apellido no puede superar 25 caracteres </p>
+                        </div> 
+                    </div> 
+                </div>
+                <div id="alta">
+                    <input type="submit" id="btnIngresar" class="btn btn-primary" ng-click="agregarSupervisor()" value="Ingresar" /> 
+                    <button class="btn btn-link" ng-click="reset()">Limpiar</button>
+                </div>
+                <div id="edit">
+                    <input type="button" id="btnConfirmar" class="btn btn-primary" ng-click="modificarSupervisor()" value="Confirmar" /> 
+                    <input type="button" id="btnCancelar" class="btn btn-default" ng-click="cancelarSupervisor()" value="Cancelar" /> 
+                </div>
+            </form>            
+        </div>
+        
+    </div>
+    <div class="row">        
+        
+        <div class="col-md-12" id="listadoSupervisor">
+            <br/>            
+            <div class="gridStyle" id="gridSupervisor" ui-grid="gridOptions" ui-grid-save-state ui-grid-exporter ui-grid-pagination ui-grid-selection ui-grid-validate ui-grid-move-columns ui-grid-pinning ></div>
+            <br/>
+        </div>
+        
+    </div>
+</div>

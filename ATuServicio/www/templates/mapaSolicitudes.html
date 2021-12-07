@@ -1,0 +1,46 @@
+<ion-view view-title="mapaSolicitudes">
+    <ion-content class="padding">
+        <div class="col-md-12 panel panel-default" ng-controller="ctrMapaSolicitudes">       
+            <div class="row" style="height: 80px;">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+                    <center><h3>{{titulo}}</h3></center>
+                </div>
+                <div class="col-md-4">
+                    <div style="padding: 5px;" id="msgPanel"></div>
+                </div>            
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2">
+                    <b style="margin-left: 20px; font-size: 15px;" >Empresas</b>
+                </div>
+                <div class="col-sm-2">
+                    <div style="margin-left: 10px;" ng-click="actualizarMapa()" ng-dropdown-multiselect="" options="colEmpresasItems" selected-model="tipoEmpresasSelect"  extra-settings="settings"></div>
+                </div>
+                <div class="col-sm-3">
+                    <b style="margin-left: 20px; font-size: 15px;" >Tipo de Servicio</b>
+                </div>
+                <div class="col-sm-2">
+                    <div style="margin-left: 10px;" ng-click="actualizarMapa()" ng-dropdown-multiselect="" options="tipoServicio" selected-model="tipoServicioSelect"  extra-settings="settings"></div>
+                </div>
+            </div>
+            <div class="row form-group">        
+                <div class="col-sm-2">
+                    <b style="margin-left: 20px; font-size: 15px;" >Cant. Sol.</b>
+                </div>
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" ng-change="actualizarMapa()" ng-model="qtSolicitantes"/>
+                </div>
+                <div class="col-sm-3">
+                    <b style="margin-left: 20px; font-size: 15px;" >Días Pendiente</b>
+                </div>
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" ng-change="actualizarMapa()" ng-model="diasPendiente" />
+                </div>
+            </div>
+            <br/>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,65 @@
+<style>
+    .form-group .help-block {
+        display: none;
+    }
+
+    .form-group.has-error .help-block {
+        display: block;
+    }
+
+</style>
+<div class="col-md-12" id="pdfZone" ng-controller="ctrRerporteCantidadSolicitudes" ng-init="generarReporte('ServiciosPorFecha',null,null)">       
+    <div class="row" style="height: 80px;">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <center><h3>{{titulo1}}</h3></center>
+        </div>
+        <div class="col-md-3">
+            <div style="padding: 5px;" id="msgPanel"></div>
+        </div>            
+    </div>
+    <div class="row">
+        <button ng-click="pdf()" title="Exportar a PDF" class="btn btn-primary"><i class="glyphicon glyphicon-download-alt"></i></button>
+    </div>
+     <div class="row"> 
+         <div class="col-md-1" >  
+           </div>
+        <div class="col-md-4" > 
+            Desde
+            <p class="input-group">
+                 <input type="text" class="form-control" uib-datepicker-popup ng-model="dtDesde" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+           
+        </div>
+         <div class="col-md-1" >  
+           </div>
+          <div class="col-md-4" >  
+              Hasta 
+            <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="dtHasta" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+           
+        </div>
+         <div class="col-md-2" >  
+             <button style="margin-top: 19px;" type="button" class="btn btn-default" ng-click="generarReporte('ServiciosPorFecha',dtDesde,dtHasta)">Filtrar <i class="glyphicon glyphicon-filter"></i></button>
+           </div>
+    </div>
+    <br/>
+    <center>
+    <div style="width: 650px; height: 1050px;" class="row">    
+        <div id="titulo1">
+        <h3>Gráfico de Barras: </h3>
+        </div>
+       <canvas  id="bar" class="chart chart-bar"chart-data="data" chart-labels="labels" chart-options="chartOption" chart-colors="colors" chart-series="series">
+       </canvas>
+    </div>
+    </center>
+</div>

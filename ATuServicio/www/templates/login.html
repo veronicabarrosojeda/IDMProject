@@ -1,0 +1,38 @@
+<ion-view view-title="Iniciar Sesión" name="login-view">
+    <ion-content class="padding masters " ng-controller="ctrLogin">
+        <div class="card cardM" style="width: 100%; margin-top: -1px;">
+            <div class="item item-text-wrap" style="text-align: center;">
+                {{tituloLogin}}
+            </div>
+        </div>
+
+        <div ng-if="verLogin">
+            <div class="list list-inset container" >
+                <label class="item item-input">
+                    <i class="icon ion-ios-person"></i><span class="input-label">Usuario *</span>
+                    <input type="text" placeholder="usuario" ng-model="usuario.nickname">
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-key"></i><span class="input-label">Clave *</span>
+                    <input type="password" placeholder="clave" ng-model="usuario.password">
+                </label>
+            </div>
+            <button class="button button-clear button-positive" style="float: right;" ng-click="verRecuPass()">¡He olvidado mi contraseña!</button>
+            <button class="button button-block button-calm" ng-click="logIn()">Ingresar <i class="icon ion-log-in"></i></button>
+        </div>
+        <div ng-if="verRecuperarPass">
+            <div class="list list-inset container" >
+                <label class="item item-input">
+                    <i class="icon ion-ios-person"></i> <span class="input-label"> Usuario* </span>
+                    <input type="text" placeholder="usuario" ng-model="recuperar.nickname">
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-email"></i> <span class="input-label"> Correo* </span>
+                    <input type="email" placeholder="correo@correo.com" ng-model="recuperar.correo">
+                </label>
+            </div>
+            <button class="button button-block button-balanced" ng-click="recuperarPass()">Recuperar <i class="icon ion-log-in"></i></button>    
+            <button class="button icon-left ion-chevron-left button-block button-calm" ng-click="volverLogin()">Cancelar</button>
+        </div>
+    </ion-content>
+</ion-view>

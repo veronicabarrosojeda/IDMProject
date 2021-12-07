@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/04/2017 09:37:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Business.Entities.Usuario" table="usuario" catalog="atuserviciobd" optimistic-lock="version">
+        <id name="idUsuario" type="java.lang.Integer">
+            <column name="idUsuario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="rol" class="Business.Entities.Rol" fetch="select">
+            <column name="idRol" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="25" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="25" not-null="true" />
+        </property>
+        <property name="nickname" type="string">
+            <column name="nickname" length="15" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="500" not-null="true" />
+        </property>
+        <property name="token" type="string">
+            <column name="token" length="100" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="100" />
+        </property>
+        <property name="estado" type="boolean">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="nroIdentidad" type="string">
+            <column name="nroIdentidad" length="30" />
+        </property>
+        <property name="tipoIdentidad" type="java.lang.Integer">
+            <column name="tipoIdentidad" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="20" />
+        </property>
+        <property name="notificar" type="java.lang.Boolean">
+            <column name="notificar" />
+        </property>
+        <set name="serviciosolicitantes" table="serviciosolicitante" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idUsuario" />
+            </key>
+            <one-to-many class="Business.Entities.Serviciosolicitante" />
+        </set>
+        <set name="empresas" table="usuarioempresa" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="idUsuario" not-null="true" />
+            </key>
+            <many-to-many entity-name="Business.Entities.Empresa">
+                <column name="idEmpresa" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

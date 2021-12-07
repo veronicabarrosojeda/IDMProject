@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/04/2017 09:37:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Business.Entities.Tipodetalle" table="tipodetalle" catalog="atuserviciobd" optimistic-lock="version">
+        <composite-id name="id" class="Business.Entities.TipodetalleId">
+            <key-property name="idTipoDetalle" type="int">
+                <column name="idTipoDetalle" />
+            </key-property>
+            <key-property name="idTipo" type="int">
+                <column name="idTipo" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tipo" class="Business.Entities.Tipo" update="false" insert="false" fetch="select">
+            <column name="idTipo" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

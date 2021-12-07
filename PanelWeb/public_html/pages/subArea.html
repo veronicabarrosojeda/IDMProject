@@ -1,0 +1,76 @@
+<style>
+    .form-group .help-block {
+        display: none;
+    }
+
+    .form-group.has-error .help-block {
+        display: block;
+    }
+
+</style>
+<div class="col-md-12" ng-controller="ctrSubArea" ng-init="listarSubAreasDArea()">       
+    <div class="row" >
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <center><h3>{{titulo}}</h3></center>
+        </div>
+        <div class="col-md-3">
+            <div style="padding: 5px;" id="msgPanel"></div>
+        </div>            
+    </div>
+    <hr/>
+    <!--Formulario-->
+    <div class="row">   
+        
+        
+        <div class="col-md-12" id="altaSubArea">      
+            <form name="subAreaForm"  class="form-horizontal" novalidate>
+                <div id ="subAreaform" class="form-group">
+                    <div class="row">
+                        
+                        <label style="text-align: left;" for="inputNombre" class="col-md-2 control-label">Nombre</label>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="text" class="form-control"  id="txtNombre" name="nombre" ng-maxlength="25" placeholder="Nombre" ng-model="formSubArea.nombre" required/> 
+                            <p class="help-block" ng-if="subAreaForm.nombre.$error.required">Nombre requerido</p>
+                            <p class="help-block" ng-if="subAreaForm.nombre.$error.maxlength">El nombre no puede superar 25 caracteres </p>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="inputDescripcion" class="col-md-2 control-label">Descripción</label>
+                        <div class="col-md-4 form-group" show-errors='{showSuccess: true}'>
+                            <input type="text" class="form-control"  id="txtdescripcion" name="descipcion" placeholder="Descipción" ng-maxlength="256" ng-model="formSubArea.descripcion" />
+                            <p class="help-block" ng-if="subAreaForm.descripcion.$error.maxlength">La descripción no puede superar los 256 caracteres </p>
+                        </div>  
+                    </div>
+                </div>
+                <div id="alta">
+                    <input type="submit" id="btnIngresar" class="btn btn-primary" ng-click="altaSubArea()" value="Ingresar" /> 
+                    <button class="btn btn-link" ng-click="reset()">Limpiar</button>
+                </div>
+
+                <div id="edit">
+                    <input type="button" id="btnConfirmar" class="btn btn-primary" ng-click="modificarSubArea()" value="Modificar" /> 
+                    <input type="button" id="btnCancelar" class="btn btn-default" ng-click="cancelarModificacion()" value="Cancelar" /> 
+                </div>
+            </form>            
+        </div>
+        
+    </div>
+    <!-- fin Formulario-->
+    <!--Grilla de Listado-->
+    <div class="row">        
+        
+        <div class="col-md-12" id="listadoUsuario">
+            <br/>            
+            <div class="gridStyle" id="gridUsuario" ui-grid="gridOptions" ui-grid-save-state ui-grid-exporter ui-grid-pagination ui-grid-selection ui-grid-validate ui-grid-move-columns ui-grid-pinning ></div>
+            <br/>
+             <!-- Modal -->
+            
+        </div>
+  
+    </div>
+    <!--fin Grilla-->
+</div>

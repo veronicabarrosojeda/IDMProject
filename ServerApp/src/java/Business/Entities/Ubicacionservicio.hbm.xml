@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/04/2017 09:37:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Business.Entities.Ubicacionservicio" table="ubicacionservicio" catalog="atuserviciobd" optimistic-lock="version">
+        <id name="idUbicacion" type="java.lang.Integer">
+            <column name="idUbicacion" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="barrio" class="Business.Entities.Barrio" fetch="select">
+            <column name="idBarrio" />
+        </many-to-one>
+        <property name="latitud" type="java.lang.Float">
+            <column name="latitud" precision="9" scale="6" />
+        </property>
+        <property name="calle" type="string">
+            <column name="calle" length="256" />
+        </property>
+        <property name="nroPuerta" type="string">
+            <column name="nroPuerta" length="15" />
+        </property>
+        <property name="apto" type="string">
+            <column name="apto" length="5" />
+        </property>
+        <property name="entreCalles" type="string">
+            <column name="entreCalles" length="256" />
+        </property>
+        <property name="nroManzana" type="string">
+            <column name="nroManzana" length="15" />
+        </property>
+        <property name="nroSolar" type="string">
+            <column name="nroSolar" length="15" />
+        </property>
+        <property name="nroPadron" type="string">
+            <column name="nroPadron" length="15" />
+        </property>
+        <property name="longitud" type="java.lang.Float">
+            <column name="longitud" precision="9" scale="6" />
+        </property>
+        <set name="servicios" table="servicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idUbicacionServicio" not-null="true" />
+            </key>
+            <one-to-many class="Business.Entities.Servicio" />
+        </set>
+    </class>
+</hibernate-mapping>

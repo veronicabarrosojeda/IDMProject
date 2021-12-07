@@ -1,0 +1,52 @@
+<ion-view view-title="Registro" name="registro-view">
+    <ion-content class="padding masters" ng-controller="ctrRegistro">
+
+        <div class="card cardM" style="width: 100%; margin-top: -1px;">
+            <div class="item item-text-wrap" style="text-align: center;">
+                Complete el formulario
+            </div>
+        </div>
+
+        <div class="list list-inset container" style="margin-top: -10px;">
+            <form name="userForm"  class="form-horizontal" novalidate>
+                <div class="list">
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-ios-person"></i><span class="input-label">Nombre *</span>
+                        <input type="text" placeholder="Nombre" required ng-model="usuario.nombre">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-ios-person"></i><span class="input-label">Apellido *</span>
+                        <input type="text" placeholder="Apellido" required ng-model="usuario.apellido">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-ios-email"></i><span class="input-label">Email</span>
+                        <input type="email" placeholder="ejemplo@correo.com" ng-model="usuario.correo">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-ios-telephone"></i><span class="input-label" icon-on="ion-ios-clock">Teléfono</span>
+                        <input type="number" placeholder="099888777" ng-model="usuario.telefono">
+                    </label>
+                    <hr>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Usuario *</span>
+                        <input type="text" placeholder="User" required ng-model="usuario.nickname">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-key"></i><span class="input-label">Clave *</span>
+                        <input type="password" placeholder="******" required ng-model="usuario.password">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <i class="icon ion-key"></i><i class="icon ion-key"></i><span class="input-label">Repetir clave *</span>
+                        <input type="password" placeholder="******" required ng-model="usuario.ritpassword">
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="row btnRegistro">
+            <button class="button icon-right ion-chevron-right button-balanced button-block center" ng-click="altaUsuario()">
+                Registrarme
+            </button>
+        </div>
+
+    </ion-content>
+</ion-view>

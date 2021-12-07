@@ -1,0 +1,6 @@
+compile.on.save=true
+<<<<<<< HEAD
+user.properties.file=/home/gandalf/.netbeans/8.1/build.properties
+=======
+user.properties.file=/home/gandalf/.netbeans/8.1/build.properties
+>>>>>>> 440e0145f3c80e88dd1ecc72b74a72ef60a54a52

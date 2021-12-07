@@ -1,0 +1,19 @@
+<div ng-controller="ctrModificarArea">
+
+    <h1>Editar área</h1>
+    <form>
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" ng-model="nombre">
+        </div>
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea class="form-control" rows="3" ng-model="descripcion"></textarea>
+        </div>
+        
+        <button ng-click="modificarArea()" class="btn btn-default">Modificar</button>
+        <button ng-click="cambiarEstado()" class="btn btn-danger">Borrar</button>
+    </form>
+    id: {{idAreaS}}
+    {{prueba}}
+</div>

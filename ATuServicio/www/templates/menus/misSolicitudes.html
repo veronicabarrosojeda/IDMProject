@@ -1,0 +1,78 @@
+<ion-view view-title="Mis Solicitudes" name="perfil-view">
+    <ion-content class="padding masters" ng-controller="ctrMisSolicitudes">
+        <!--
+        <table class="table table-bordered" style="width: 100%;">
+                <tr>
+                    <th>Número</th>
+                    <th>Estado</th>
+                    <th>Info</th>
+                </tr>
+                <tr ng-repeat="solicitud in solicitudes">
+                    <td>{{solicitud.idServicio}}</td>
+                    <td>{{solicitud.nombre}}</td>
+                    <td><button class="button button-small button-calm" ng-click="verDetallesSolicitud(solicitud)"><i class="icon ion-ios-information"></i></button></td>
+                </tr>
+            </table>
+        
+        -->
+
+        <div class="list list-inset container" ng-if="verTodas" style="margin-top: -1px;">
+
+            <div class="row header">
+                <div class="col col-30">Número</div>
+                <div class="col col-50">Estado</div>
+                <div class="col col-20">Info</div>
+            </div>
+            <div class="row" ng-repeat="solicitud in solicitudes">
+                <div class="col col-30">{{solicitud.idServicio}}</div>
+                <div class="col col-50">{{solicitud.nombre}}</div>
+                <div class="col col-20"><button class="button button-small button-calm" ng-click="verDetallesSolicitud(solicitud)"><i class="icon ion-ios-information"></i></button></div>
+            </div>
+        </div>
+        <div class="row" ng-if="verDatos" style="margin-top: -8%;">
+            <div class="list list-inset container formDatos">
+                <div class="list">
+                    <label class="item tituloFormDatos">
+                        Datos de la Solicitud
+                    </label>
+                    <img ng-src="{{soli.rutaImagen}}" class="imgSolicitud">
+
+                    <label class="item item-input ">
+                        <i class="icon ion-ios-information"></i><span class="input-label"> Número:</span>
+                        <p class="lblDato">       {{soli.idServicio}}</p>
+                    </label>
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label">Descripion motivo: </span>
+                    </label>
+                    <label class="item"><p class="lblDato">{{soli.descripcionServicio}}</p></label>
+
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label">Servicio solicitado:</span>
+                    </label>
+                    <label class="item"><p class="lblDato">{{soli.nombreTipoServicio}}</p></label>
+
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label" icon-on="ion-ios-clock">Area asignada:</span>
+                    </label>
+                    <label class="item"><p class="lblDato">{{soli.nombreArea}}</p></label>
+
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label" icon-on="ion-ios-clock">Fecha de ingreso:</span>
+                    </label>
+                    <label class="item"><p class="lblDato">{{soli.fechaIngreso}}</p></label>
+                    <label class="item item-input">
+                        <i class="icon ion-ios-information"></i><span class="input-label" icon-on="ion-ios-clock"> Estado:</span>
+                        <p class="lblDato">{{soli.nombre}}</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="verDatos">
+            <div class="button-bar">
+                <a class="button button-calm button-block center" ng-click="volverForm()">
+                    <i class="icon ion-ios-undo"></i> Ver Todas
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

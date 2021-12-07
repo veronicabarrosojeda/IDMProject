@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/proyectoidm?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property>
+    <mapping resource="Business/Entities/Usuario.hbm.xml"/>
+    <mapping resource="Business/Entities/Tipo.hbm.xml"/>
+    <mapping resource="Business/Entities/Historialservicio.hbm.xml"/>
+    <mapping resource="Business/Entities/Subarea.hbm.xml"/>
+    <mapping resource="Business/Entities/Notificaciones.hbm.xml"/>
+    <mapping resource="Business/Entities/Empresa.hbm.xml"/>
+    <mapping resource="Business/Entities/Tiposervicio.hbm.xml"/>
+    <mapping resource="Business/Entities/Municipio.hbm.xml"/>
+    <mapping resource="Business/Entities/Servicio.hbm.xml"/>
+    <mapping resource="Business/Entities/Area.hbm.xml"/>
+    <mapping resource="Business/Entities/Barrio.hbm.xml"/>
+    <mapping resource="Business/Entities/Serviciosolicitante.hbm.xml"/>
+    <mapping resource="Business/Entities/Ubicacionservicio.hbm.xml"/>
+    <mapping resource="Business/Entities/Supervisor.hbm.xml"/>
+    <mapping resource="Business/Entities/Permiso.hbm.xml"/>
+    <mapping resource="Business/Entities/Tipodetalle.hbm.xml"/>
+    <mapping resource="Business/Entities/Rol.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

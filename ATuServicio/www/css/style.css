@@ -1,0 +1,136 @@
+/* Empty. Add your own CSS if you like */
+
+body{
+    font-family: 'Montserrat', sans-serif !important;
+}
+.col:last-child {
+    border-right: none !important; 
+}
+
+.col {
+    border: none !important;
+    border-bottom-style: none !important;
+    border-right-style: none !important;
+}
+
+.logoIDM{
+    width: 100px !important; 
+    height: 100px !important; 
+    background-size: cover !important; 
+    margin-left: 88% !important;
+    background-image: url("../images/imgApp/IDM.jpg");
+    background-repeat:no-repeat;
+}
+
+.inicio{
+    background-image: url("../images/imgApp/pda1.jpg");
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
+.masters{
+    background-color: #E0E6F8;
+
+}
+.cardBorder{
+    -webkit-border-radius: 5px !important;
+    -moz-border-radius: 5px !important;
+    border-radius: 5px !important;
+}
+
+.navMenu{
+    background-color: #0d5c91 !important;
+}
+
+.angular-google-map,
+.angular-google-map-container {
+    width: 100%;
+    height: 370px;
+    margin-top: -5px;
+}
+
+.cardM{
+    margin-top: 2px;
+}
+.banner{
+    height: 10%;
+}
+.bannerSig{
+    height: 15%;
+}
+
+.container{
+    margin-top: 0px;
+}
+.tipoMap{
+    background-color: transparent;
+}
+
+.frmUbicacionManual{
+    background-color: #bbc0c9;
+    padding: 15px;
+    width: 100%;
+    margin-top: 0px;
+    border-radius: 3px;
+
+}
+/*GENERIC*/
+.imgSolicitud{
+    width: 50%;
+    height: 10%;
+    background-size: cover;
+    margin-top: 1%;
+    margin-left: 25%;}
+.select{
+    width: 95%;
+}
+.btnUltimo{
+    float: left;
+    margin-top: -5% !important;
+}
+
+/*REGISTRO*/
+.btnRegistro{
+    margin-top: -8%;
+}
+
+/*Inicio*/
+.imgInicio{
+    height:10%;
+    width: 40%;
+}
+.tituloInicio{
+    color: #2095cb;
+}
+/*Seguimiento Solicitud*/
+.tituloFormDatos{
+    text-align: center;
+}
+.formDatos{
+    width: 100%;
+}
+.lblDato{
+    margin-right: 3%;
+}
+/*Mis Solicitudes*/
+.header .col {
+    background-color:#2095cb;
+}
+
+.col {
+    border: solid 1px grey;
+    border-bottom-style: none;
+    border-right-style: none;
+}
+
+.col:last-child {
+    border-right: solid 1px grey;
+}
+
+.row:last-child .col {
+    border-bottom: solid 1px grey;
+}
+/*LOGIN*/
+.pageLogin{
+    background: #daecf5;
+}

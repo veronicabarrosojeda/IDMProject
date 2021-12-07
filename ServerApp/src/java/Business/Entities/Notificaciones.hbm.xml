@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/04/2017 09:37:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Business.Entities.Notificaciones" table="notificaciones" catalog="atuserviciobd" optimistic-lock="version">
+        <id name="idNotificaciones" type="java.lang.Long">
+            <column name="idNotificaciones" />
+            <generator class="identity" />
+        </id>
+        <property name="asunto" type="string">
+            <column name="asunto" length="100" />
+        </property>
+        <property name="mensaje" type="string">
+            <column name="mensaje" length="1000" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="80" not-null="true" />
+        </property>
+        <property name="enviado" type="string">
+            <column name="enviado" length="1" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,202 @@
+<style>
+    .form-group .help-block {
+        display: none;
+    }
+
+    .form-group.has-error .help-block {
+        display: block;
+    }
+    .angular-google-map-container { height: 400px; }    
+
+</style>
+
+<div class="col-md-12" ng-controller="ctrVerServicio" ng-init="getServicio()">
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <center><h3>{{titulo}}</h3></center><br>
+        </div>
+        <div class="col-md-3">
+            <div style="padding: 5px;" id="msgPanel"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" id="altaServicio">
+            <form name="formServicioS"  class="form-horizontal" novalidate>
+                <div class="row">
+                    <div class="col-md-3 form-group" show-errors='{showSuccess: true}' >
+                        <label style="text-align: left;" for="itemSelect2" class="col-md-12 control-label">Cambiar estado</label>
+                        <select class="form-control" id="estado" name="idEstado" ng-model="nuevoServicio.estado">
+                            <option ng-selected="{{estado.clave == estadoServicio}}" ng-repeat="estado in estados" value="{{estado.clave}}">{{estado.descripcion}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-1 form-group" show-errors='{showSuccess: true}' ></div>
+
+                    <div class="col-md-4 form-group" show-errors='{showSuccess: true}' >
+                        <label style="text-align: left;" for="txtDescripcion" class="col-sm-12 control-label">Descripción</label>
+
+                        <textarea readonly="true" class="form-control" id="txtDescripcion" name="descripcion" ng-model="nuevoServicio.descripcion" ng-maxlength="256" placeholder="Descripción"> </textarea>
+
+                        <br>
+                    </div>
+
+                    <div class="col-md-1 form-group" ></div>
+
+                    <div class="col-md-4 form-group" >
+                        <label style="text-align: left;" for="itemSelect3" class="col-md-12 control-label">Selecciona el tipo de servicio</label>
+                        <select class="form-control" id="idCategoria" name="idCategoria" ng-model="nuevoServicio.idCategoria">
+                            <option ng-selected="{{categoria.clave == categoriaSelect}}" ng-repeat="categoria in categorias" value="{{categoria.clave}}">{{categoria.descripcion}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 form-group" >
+                        <label style="text-align: left;" for="txtObservaciones" class="col-md-12 control-label">Observaciones</label>
+                        <textarea  class="form-control" id="txtObservaciones" name="observaciones" ng-model="nuevoServicio.observaciones" ng-maxlength="512" placeholder="Observaciones"> </textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 form-group" >
+
+                        <input type="button" id="btnConfirmar" class="btn btn-primary" ng-click="modificarServicio()" value="Guardar Cambios" /> 
+                        <br>
+                    </div>
+                    <div class="col-md-8 form-group" ></div>
+                    <div class="col-md-2 form-group" >
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg">Ver Imagen</button>
+                    </div>
+                </div>
+
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <center><img ng-src="{{imagen}}"></center>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12" id="listadoHistorial">
+                        <br/>            
+                        <div class="gridStyle" ui-grid="gridOptions" ui-grid-edit ui-grid-exporter ui-grid-pagination ui-grid-selection ui-grid-validate ui-grid-move-columns ui-grid-pinning ></div> 
+                        <br/>
+                    </div>
+
+                </div>
+
+                <input type="button" id="btnVerUbicacion" class="btn btn-link" ng-click="verUbicacion()" value="Ver Ubicacion de la solicitud" /> 
+
+                <!-- VER UBICACION -->
+
+                <div class="row">
+                    <br/>
+                    <div class="habilitarUbicacionManual" ng-if="habilitarUbicacionManual" >
+                        <div class="row">
+                            <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                                <label style="text-align: left;" for="selectedName" class="col-md-12 control-label">Municipio</label>
+                                <select disabled class="form-control" id="itemSelect2" name="idMunicipio" ng-required="{{change == false}}" ng-model="nuevoServicio.idMunicipio" required>
+                                    <option ng-selected="{{municipio.clave == servicio.idMunicipio}}" ng-repeat="municipio in municipios" value="{{municipio.clave}}">{{municipio.descripcion}}</option>
+                                </select>
+
+                                <p class="help-block" ng-if="formServicioS.itemSelect2.$error.required">Municipio requerido</p>
+                            </div>
+                            <div class="col-md-2 form-group" show-errors='{showSuccess: true}' > </div>
+
+                            <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                                <label style="text-align: left;" for="selectedName" class="col-md-12 control-label">Barrio</label>
+                                <select disabled class="form-control" id="itemSelect2" name="idBarrio" ng-required="{{change == false}}" ng-model="nuevoServicio.idBarrio" required>
+                                    <option ng-selected="{{barrio.clave == servicio.idBarrio}}" ng-repeat="barrio in barrios" value="{{barrio.clave}}">{{barrio.descripcion}}</option>
+                                </select>
+
+                                <p class="help-block" ng-if="formServicioS.itemSelect2.$error.required">Barrio requerido</p>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                                <label style="text-align: left;" for="txtCalle" class="col-md-12 control-label">Calle:</label>
+                                <input readonly="true" type="text" class="form-control"  id="txtCalle" name="calle" ng-required="{{change == false}}" ng-maxlength="50" ng-model="calle" required/> 
+
+                            </div>
+
+                            <div class="col-md-2 form-group" show-errors='{showSuccess: true}' ></div>
+
+                            <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                                <label style="text-align: left;" for="txtEntreCalles" class="col-md-12 control-label">Entre calles:</label>
+                                <input readonly="true" type="text" class="form-control"  id="txtEntreCalles" ng-required="{{change == false}}" name="entreCalles" ng-maxlength="150" ng-model="entreCalles" required/> 
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                                <label style="text-align: left;" for="txtManzana" class="col-md-12 control-label">Número de manzana:</label>
+                                <input readonly="true" type="text" class="form-control"  id="txtManzana" name="nroManzana" ng-maxlength="15" ng-model="nroManzana" /> 
+                            </div>
+
+                            <div class="col-md-2 form-group" show-errors='{showSuccess: true}' ></div>
+
+                            <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                                <label style="text-align: left;" for="txtSolar" class="col-md-12 control-label">Número de solar:</label>
+                                <input readonly="true" type="text" class="form-control"  id="txtSolar" name="nroSolar" ng-maxlength="15" ng-model="nroSolar" /> 
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                                <label style="text-align: left;" for="txtPadron" class="col-md-12 control-label">Número de padrón:</label>
+                                <input readonly="true" type="text" class="form-control"  id="txtPadron" name="nroPadron" ng-maxlength="15" ng-model="nroPadron" />
+                            </div>
+
+                            <div class="col-md-2 form-group" show-errors='{showSuccess: true}' ></div>
+
+                            <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                                <label style="text-align: left;" for="txtNroPuerta" class="col-md-12 control-label">Número de puerta:</label>
+                                <input readonly="true" type="text" class="form-control"  id="txtNroPuerta" name="nroPuerta" ng-maxlength="15" ng-model="nroPuerta" />
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5 form-group" show-errors='{showSuccess: true}' >
+                                <label style="text-align: left;" for="txtApto" class="col-md-12 control-label">Número de apto:</label>
+                                <input readonly="true" type="text" class="form-control"  id="txtApto" name="apto" ng-maxlength="5" ng-model="apto" /> 
+                            </div>
+                            <div class="col-md-7 form-group" show-errors='{showSuccess: true}' ></div>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div ng-if="habilitarMapa">
+                    <div class="row" >
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' events='map.events' refresh="map.refresh">
+                            <ui-gmap-marker coords="pin.coords" idkey="2"></ui-gmap-marker>
+                            <ui-gmap-polygons
+                                models="polygons" dorebuildall="true" fill="'fill'"
+                                path="'path'" stroke="'stroke'" geodesic="'geodesic'"
+                                fit="false" editable="'editable'" draggable="'draggable'" clickable="'clickable'" >
+                            </ui-gmap-polygons>
+
+                        </ui-gmap-google-map>
+                        <br><br>
+                    </div>
+                </div>
+
+            </form>        
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<style>
+    .form-group .help-block {
+        display: none;
+    }
+
+    .form-group.has-error .help-block {
+        display: block;
+    }
+
+</style>
+<div class="col-md-12" ng-controller="ctrBarrio" ng-init="listarBarrios()">       
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <center><h3>{{titulo}}</h3></center>
+        </div>
+        <div class="col-md-3">
+            <div style="padding: 5px;" id="msgPanel"></div>
+        </div>            
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12" id="altaSubArea">      
+            <form name="barrioForm"  class="form-horizontal" novalidate>
+                <div id ="barrioform" class="form-group">
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="inputNombre" class="col-md-2 control-label">Nombre</label>
+                        <div class="col-md-6 form-group" show-errors='{showSuccess: true}'>
+                            <input type="text" class="form-control"  id="txtNombre" name="nombre" ng-maxlength="25" placeholder="Nombre barrio" ng-model="formBarrio.nombre" required/> 
+                            <p class="help-block" ng-if="barrioForm.nombre.$error.required">Nombre requerido</p>
+                            <p class="help-block" ng-if="barrioForm.nombre.$error.maxlength">El nombre no puede superar 25 caracteres </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <label style="text-align: left;" for="inputDescripcion" class="col-md-2 control-label">Descripción</label>
+                        <div class="col-md-6 form-group" show-errors='{showSuccess: true}'>
+                            <textarea class="form-control"  id="txtdescripcion" name="descipcion" placeholder="Descripción" ng-maxlength="256" ng-model="formBarrio.descripcion"></textarea>
+                            <p class="help-block" ng-if="barrioForm.descripcion.$error.maxlength">La descripción no puede superar los 256 caracteres </p>
+                        </div>  
+                    </div>
+                    <div class="row" >
+                        <br/>
+                        <label style="text-align: left;" for="select" class="col-md-2 control-label">Municipio</label>
+                        <div class="col-md-6 form-group" show-errors='{showSuccess: true}' >
+                            <select class="form-control" id="itemSelect" name="idMunicipio" ng-model="formBarrio.idMunicipio" required="" >
+                                <option  ng-repeat="municipio in municipios"  value="{{municipio.clave}}">{{municipio.descripcion}}</option>                                                                
+                            </select>                                      
+                            <p class="help-block" ng-if="barrioForm.itemSelect.$error.required">Municipio requerido</p>
+                        </div>
+                    </div>           
+                </div>
+                <div id="alta">
+                    <input type="submit" id="btnIngresar" class="btn btn-primary" ng-click="altaBarrio()" value="Ingresar" /> 
+                    <button class="btn btn-link" ng-click="reset()">Limpiar</button>
+                </div>
+                <div id="edit">
+                    <input type="button" id="btnConfirmar" class="btn btn-primary" ng-click="modificarBarrio()" value="Confirmar" /> 
+                    <input type="button" id="btnCancelar" class="btn btn-default" ng-click="cancelarModificacion()" value="Cancelar" /> 
+                </div>
+            </form>            
+        </div>
+    </div>
+    <div class="row">        
+
+        <div class="col-md-12" id="listadoBarrio">
+            <br/>            
+            <div class="gridStyle" id="gridBarrio" ui-grid="gridOptions" ui-grid-save-state ui-grid-exporter ui-grid-pagination ui-grid-selection ui-grid-validate ui-grid-move-columns ui-grid-pinning ></div>
+            <br/>
+        </div>
+
+    </div>
+</div>

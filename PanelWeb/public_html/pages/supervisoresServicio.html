@@ -1,0 +1,33 @@
+<style>
+    .form-group .help-block {
+        display: none;
+    }
+
+    .form-group.has-error .help-block {
+        display: block;
+    }
+
+</style>
+<div class="col-md-12 panel panel-default" ng-controller="ctrServicioSupervisor" ng-init="listarSupervisores()">       
+    <div class="row" style="height: 80px;">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <center><h3>{{titulo}}</h3></center>
+        </div>
+        <div class="col-md-3">
+            <div style="padding: 5px;" id="msgPanel"></div>
+        </div>            
+    </div>
+    <div class="row">        
+        <div class="col-md-1" ></div>
+        <div class="col-md-10" id="listaSupervisores" >
+            <br/>            
+            <div class="gridStyle" id="gridSupervisores" ui-grid="gridOptions" ui-grid-save-state ui-grid-exporter ui-grid-pagination ui-grid-selection ui-grid-validate ui-grid-move-columns ui-grid-pinning ></div>
+            <br/>
+            <input type="button" id="btnConfirmar" class="btn btn-primary" ng-click="modificarSupervisores()" value="Confirmar" /> 
+        </div>
+        <div class="col-md-1" ></div>
+    </div>
+</div>
